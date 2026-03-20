@@ -6,7 +6,7 @@
 /*   By: maaugust <maaugust@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:39:15 by maaugust          #+#    #+#             */
-/*   Updated: 2026/02/17 01:34:11 by maaugust         ###   ########.fr       */
+/*   Updated: 2026/03/20 15:19:20 by maaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,13 @@ static ssize_t	read_line(int fd, char **buffer, char **new_line)
 		return (ft_strlen(*buffer));
 	n_bytes = read(fd, *buffer, BUFFER_SIZE);
 	if (n_bytes > 0)
-		return ((*buffer)[n_bytes] = '\0', n_bytes);
-	if (n_bytes < 0 && *new_line)
 	{
-		free (*new_line);
-		*new_line = NULL;
+		(*buffer)[n_bytes] = '\0';
+		return (n_bytes);
 	}
-	free(*buffer);
-	*buffer = NULL;
+	if (n_bytes < 0 && *new_line)
+		free_memory(new_line);
+	free_memory(buffer);
 	return (n_bytes);
 }
 
@@ -68,7 +67,6 @@ char	*get_next_line(int fd)
 	static char	*buffer[FD_SIZE];
 	char		*new_line;
 	ssize_t		n_bytes;
-	size_t		len;
 	int			i;
 
 	new_line = NULL;
@@ -80,14 +78,14 @@ char	*get_next_line(int fd)
 			;
 		new_line = ft_str_realloc(&new_line, i);
 		if (!new_line)
-			return (free(buffer[fd]), buffer[fd] = NULL, NULL);
-		len = ft_strlen(new_line);
-		ft_copy_chars(new_line + len, buffer[fd], i);
-		ft_copy_chars(buffer[fd], buffer[fd] + i, n_bytes - i);
-		len += i;
-		if (len > 0 && new_line[len - 1] == '\n')
+			return (free_memory(&buffer[fd]));
+		ft_strlcpy(new_line + ft_strlen(new_line), buffer[fd], i + 1);
+		ft_strlcpy(buffer[fd], buffer[fd] + i, n_bytes - i + 1);
+		if (ft_strchr(new_line, '\n'))
 			break ;
 		n_bytes = read_line(fd, &buffer[fd], &new_line);
 	}
+	if (buffer[fd] && buffer[fd][0] == '\0')
+		free_memory(&buffer[fd]);
 	return (new_line);
 }

@@ -6,7 +6,7 @@
 /*   By: maaugust <maaugust@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:38:46 by maaugust          #+#    #+#             */
-/*   Updated: 2026/02/17 01:32:00 by maaugust         ###   ########.fr       */
+/*   Updated: 2026/03/20 21:57:35 by maaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 /* INCLUDES                                                                   */
 /* ========================================================================== */
 
+/* --------------------------- Internal Libraries --------------------------- */
 # include <unistd.h>
 # include <stdlib.h>
 
@@ -25,20 +26,21 @@
 /* ========================================================================== */
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000000
-# endif
-
-# ifndef FD_SIZE
-#  define FD_SIZE 1024
+#  define BUFFER_SIZE 4096
 # endif
 
 /* ========================================================================== */
 /* FUNCTIONS                                                                  */
 /* ========================================================================== */
 
+/* ----------------------------- Main Function ------------------------------ */
 char	*get_next_line(int fd);
+
+/* --------------------------- Utility Functions ---------------------------- */
+char	*free_memory(char **ptr);
 size_t	ft_strlen(const char *s);
-void	ft_copy_chars(char *dst, const char *src, size_t size);
-char	*ft_str_realloc(char **str, size_t size);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+char	*ft_strchr(const char *s, int c);
+char	*ft_str_realloc(char **s, size_t size);
 
 #endif
