@@ -1,7 +1,7 @@
 *This project has been created as part of the 42 curriculum by maaugust.*
 
 <div align="center">
-  <img src="assets/cover-get_next_line-bonus.png" alt="get_next_line Cover" width="100%" />
+  <img src="https://raw.githubusercontent.com/rfs-hybrid/42-Common-Core/main/assets/covers/cover-get_next_line-bonus.png" alt="get_next_line Cover" width="100%" />
 </div>
 
 <div align="center">
