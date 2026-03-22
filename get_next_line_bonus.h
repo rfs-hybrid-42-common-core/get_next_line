@@ -6,7 +6,7 @@
 /*   By: maaugust <maaugust@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:38:46 by maaugust          #+#    #+#             */
-/*   Updated: 2026/03/20 21:57:43 by maaugust         ###   ########.fr       */
+/*   Updated: 2026/03/22 05:40:31 by maaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,20 @@
 /* MACROS                                                                     */
 /* ========================================================================== */
 
+/**
+ * @def BUFFER_SIZE
+ * @brief Defines the number of bytes to read from the file descriptor per 
+ * read() call. Can be overridden at compile time using the -D flag.
+ */
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096
 # endif
 
+/**
+ * @def FD_SIZE
+ * @brief Defines the maximum number of file descriptors that can be tracked 
+ * simultaneously in the static array without losing their reading state.
+ */
 # ifndef FD_SIZE
 #  define FD_SIZE 1024
 # endif

@@ -6,7 +6,7 @@
 /*   By: maaugust <maaugust@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:38:46 by maaugust          #+#    #+#             */
-/*   Updated: 2026/03/20 21:57:35 by maaugust         ###   ########.fr       */
+/*   Updated: 2026/03/22 05:40:12 by maaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@
 /* MACROS                                                                     */
 /* ========================================================================== */
 
+/**
+ * @def BUFFER_SIZE
+ * @brief Defines the number of bytes to read from the file descriptor per 
+ * read() call. Can be overridden at compile time using the -D flag.
+ */
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096
 # endif
