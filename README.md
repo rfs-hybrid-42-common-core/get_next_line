@@ -142,7 +142,24 @@ This repository includes a custom, comprehensive tester that automatically creat
   cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 gnl_tester.c get_next_line_bonus.c get_next_line_utils_bonus.c -o tester
   ./tester
   ```
-*(Note: Try compiling with extreme `-D BUFFER_SIZE` values like `1` or `10000000` to test the robustness of the algorithm!)*
+
+#### 🛡️ Memory Leak Verification (Valgrind)
+Because `get_next_line` relies on static variables, it is incredibly prone to "still reachable" memory leaks if a file is not read completely to EOF, or if an invalid FD is passed. To verify the absolute memory safety of this algorithm, compile the custom tester above and run it through `valgrind` under extreme `BUFFER_SIZE` conditions:
+
+**Scenario 1: The `malloc` Stress Test (BUFFER_SIZE=1)**
+Forces the algorithm to reallocate memory dynamically for every single character read.
+```bash
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=1 gnl_tester.c get_next_line.c get_next_line_utils.c -o tester
+valgrind --leak-check=full --show-leak-kinds=all ./tester
+```
+
+**Scenario 2: The Giant Buffer Test (BUFFER_SIZE=10000000)**
+Forces a massive initial heap allocation. Ensures the static pointer is cleanly freed when EOF or an invalid FD (`-1`) is encountered.
+```bash
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=10000000 gnl_tester.c get_next_line.c get_next_line_utils.c -o tester
+valgrind --leak-check=full --show-leak-kinds=all ./tester
+```
+*Expected Valgrind Output: `All heap blocks were freed -- no leaks are possible`*
 
 **2. Third-Party Testers (Francinette)**
 Francinette is a widely used testing framework within the 42 community that runs strict tests (including memory leak checks and edge cases) against your logic.
