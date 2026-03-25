@@ -6,7 +6,7 @@
 /*   By: maaugust <maaugust@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:39:15 by maaugust          #+#    #+#             */
-/*   Updated: 2026/03/20 15:19:20 by maaugust         ###   ########.fr       */
+/*   Updated: 2026/03/25 00:28:16 by maaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
  * @details Manages heap allocation for the specific file descriptor's buffer.
  * If reading returns EOF or an error, it cleanly frees the buffer and the
  * partial line to prevent memory leaks across multiple FDs.
- * @param fd The file descriptor to read from.
- * @param buffer Double pointer to the specific FD's residual buffer.
+ * @param fd       The file descriptor to read from.
+ * @param buffer   Double pointer to the specific FD's residual buffer.
  * @param new_line A double pointer to the dynamically allocated return string.
- * @return The number of bytes read, 0 if EOF or invalid FD, or -1 on error.
+ * @return         The number of bytes read, 0 if EOF or invalid FD, or -1 on 
+ * error.
  */
 static ssize_t	read_line(int fd, char **buffer, char **new_line)
 {
@@ -54,12 +55,16 @@ static ssize_t	read_line(int fd, char **buffer, char **new_line)
 /**
  * @fn char *get_next_line(int fd)
  * @brief Extracts the next line of text from multiple file descriptors.
- * @details Utilizes a static array of pointers to independently track residual
- * bytes for up to FD_SIZE file descriptors, allowing seamless switching
- * between files without losing state. Memory is allocated on-demand to
- * drastically reduce static memory footprint.
+ * @details Repeated calls to this function allow reading a text file pointed 
+ * to by the file descriptor, one line at a time. It utilizes a static array of 
+ * pointers to manage multiple file descriptors at the same time. This ensures 
+ * that you can read from a different file descriptor with each call, without 
+ * losing track of the reading state of each file descriptor or returning a 
+ * line from a different one. It handles dynamic memory allocation and 
+ * seamlessly shifts unparsed residual data, properly freeing memory upon 
+ * reaching EOF or encountering a read error to prevent leaks.
  * @param fd The file descriptor to read from.
- * @return A dynamically allocated string containing the extracted line,
+ * @return   A dynamically allocated string containing the extracted line,
  * or NULL if there is nothing else to read or an error occurs.
  */
 char	*get_next_line(int fd)
