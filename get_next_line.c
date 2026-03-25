@@ -6,7 +6,7 @@
 /*   By: maaugust <maaugust@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:39:15 by maaugust          #+#    #+#             */
-/*   Updated: 2026/03/20 21:57:11 by maaugust         ###   ########.fr       */
+/*   Updated: 2026/03/25 00:20:36 by maaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
  * @details Manages heap allocation for the specific file descriptor's buffer. 
  * If reading returns EOF or an error, it cleanly frees the buffer and the 
  * partial line to prevent memory leaks across multiple FDs.
- * @param fd The file descriptor to read from.
- * @param buffer Double pointer to the specific FD's residual buffer.
+ * @param fd       The file descriptor to read from.
+ * @param buffer   Double pointer to the specific FD's residual buffer.
  * @param new_line A double pointer to the dynamically allocated return string.
- * @return The number of bytes read, 0 if EOF or invalid FD, or -1 on error.
+ * @return         The number of bytes read, 0 if EOF or invalid FD, or -1 on 
+ * error.
  */
 static ssize_t	read_line(int fd, char **buffer, char **new_line)
 {
@@ -60,7 +61,7 @@ static ssize_t	read_line(int fd, char **buffer, char **new_line)
  * seamlessly shifts unparsed residual data and properly frees memory upon 
  * reaching EOF or encountering a read error to prevent leaks.
  * @param fd The file descriptor to read from.
- * @return A dynamically allocated string containing the extracted line, 
+ * @return   A dynamically allocated string containing the extracted line, 
  * or NULL if there is nothing else to read or an error occurs.
  */
 char	*get_next_line(int fd)

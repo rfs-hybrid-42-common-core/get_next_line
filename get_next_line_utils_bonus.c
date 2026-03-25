@@ -6,7 +6,7 @@
 /*   By: maaugust <maaugust@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:39:26 by maaugust          #+#    #+#             */
-/*   Updated: 2026/03/20 15:24:31 by maaugust         ###   ########.fr       */
+/*   Updated: 2026/03/25 00:18:10 by maaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @details Consolidates deallocation logic to prevent dangling pointers 
  * and memory leaks across multiple error-handling branches.
  * @param ptr Double pointer to the memory to be freed.
- * @return Always returns NULL.
+ * @return    Always returns NULL.
  */
 char	*free_memory(char **ptr)
 {
@@ -101,12 +101,12 @@ char	*ft_strchr(const char *s, int c)
 /**
  * @fn char *ft_str_realloc(char **s, size_t size)
  * @brief Dynamically expands a string to accommodate more characters.
- * @details If the string is NULL, it allocates a new buffer of the given size.
- * If the string exists, it allocates a larger buffer, copies the old contents,
+ * @details If the string is NULL, it allocates a new buffer of the given size. 
+ * If the string exists, it allocates a larger buffer, copies the old contents, 
  * and frees the previous memory location.
  * @param s    A double pointer to the dynamically allocated string to expand.
  * @param size The additional number of characters the string needs to hold.
- * @return A pointer to the newly allocated and expanded string, or NULL
+ * @return     A pointer to the newly allocated and expanded string, or NULL 
  * if memory allocation fails.
  */
 char	*ft_str_realloc(char **s, size_t size)
